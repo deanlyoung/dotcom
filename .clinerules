@@ -1,0 +1,52 @@
+## Project Overview
+This is a static personal website for deanlyoung.com. It uses:
+- Plain HTML/CSS/JS (no framework)
+- Markdown blog system with a custom `build.js` (Node.js)
+- GitHub Pages for deployment
+
+## Local Development Server
+- **Always preview via localhost** — never open HTML files directly with `open <file>.html`
+- Use `npm run serve` to start the local server (uses `serve.sh` which checks for port conflicts)
+- The site is served from the project root at `http://127.0.0.1:8000`
+- To open a page in the browser: `open http://127.0.0.1:8000/<page>/`
+  - Example: `open http://127.0.0.1:8000/philosophy/`
+  - Example: `open http://127.0.0.1:8000/about/`
+- If blog content has changed, run `npm run build` before serving
+- `serve.sh` checks if port 8000 is already in use — if so, it prints a message and exits gracefully instead of crashing
+
+## npm Scripts
+- `npm run build` — builds blog posts from markdown to HTML (warns about unreviewed posts, does not block)
+- `npm run review` — checks all posts against the editorial standard; exits non-zero on failure
+- `npm run serve` — starts `live-server` on port 8000 (via `serve.sh`, with port conflict detection)
+- `npm start` — builds blog posts then starts the server
+
+## Editorial Standard
+Every blog post must pass editorial review before publishing. The standard is defined in `EDITORIAL-STANDARD.md`.
+
+- Each post's frontmatter must include an `editorial_review` block with seven criteria, all set to `true`
+- `npm run review` validates all posts — CI runs this before build and blocks deployment on failure
+- `npm run build` prints non-blocking warnings for unreviewed posts (allows local preview of drafts)
+- When creating or editing a blog post, always include the `editorial_review` frontmatter block
+- The seven criteria: `personally_specific`, `intellectually_honest`, `generous_to_subjects`, `observation_separated_from_fact`, `date_bound_advice_dated`, `opinions_earned`, `rights_cleared`
+- `npm run review` also checks markdown formatting: frontmatter fields, reference links, footnotes, heading hierarchy, image alt text, trailing whitespace, and empty content
+
+## File Structure
+- `index.html` — homepage
+- `about/index.html` — about page
+- `philosophy/index.html` — philosophy page
+- `craft/index.html` — craft page
+- `resume/index.html` — resume page
+- `blog/index.html` — blog listing (generated)
+- `content/blog/*.md` — blog post source files (markdown)
+- `css/styles.css` — all site styles
+- `js/scripts.js` — all site JavaScript
+- `build.js` — blog build script
+- `review.js` — editorial review checker script
+- `EDITORIAL-STANDARD.md` — editorial standard definition and workflow
+- `assets/` — images, icons, and static files
+
+## Coding Conventions
+- Use the existing CSS variables in `:root` (e.g., `--ink`, `--warm-paper`, `--oxblood`, `--deep-moss`, `--golden-ochre`)
+- Follow the existing HTML structure pattern: `.site-shell` > `.site-header` + `main.content.page-content` + `.site-footer`
+- Keep JS in `js/scripts.js` — no inline scripts except analytics/JSON-LD
+- All pages include JSON-LD structured data in the `<head>`

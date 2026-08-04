@@ -1,0 +1,19 @@
+{
+  "name": "deanlyoung-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static personal website for deanlyoung.com with markdown blog and RSS feed.",
+"scripts": {
+"build": "node build.js",
+"review": "node review.js",
+"summarize": "node summarize.js",
+"editorial-agent": "node review-agent.js",
+"serve": "bash serve.sh",
+"start": "npm run build && bash serve.sh"
+},
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^10.0.0",
+    "marked-footnote": "^1.4.0"
+  }
+}

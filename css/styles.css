@@ -1,0 +1,755 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500&display=swap');
+
+/* Minimal readable typography with a clean reading rhythm. */
+:root {
+  /* Brand palette */
+  --ink: #181A19;
+  --warm-paper: #F1E9DC;
+  --oxblood: #9F2638;
+  --deep-moss: #30483B;
+  --golden-ochre: #D3A33B;
+
+  /* Header bar settings */
+  --header-height: 56px;
+  --bar-width: 8px;
+  --bar-gap: 3px;
+  --bar-color: var(--ink);
+  --header-bg: var(--warm-paper);
+
+  color-scheme: light;
+  color: var(--ink);
+  background: var(--warm-paper);
+  --site-font: "APHont", "Gill Sans", "Segoe UI", Arial, sans-serif;
+  font-family: var(--site-font);
+  line-height: 1.65;
+  font-size: 18px;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: "APHont";
+  src: local("APHont"), local("APHont Regular");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "APHont";
+  src: local("APHont Bold"), local("APHont-Bold");
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Make room for the fixed header bars */
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: var(--header-height);
+  background: var(--warm-paper);
+  color: var(--ink);
+}
+
+/* Fixed header bar row - now an <a> wrapping everything to homepage */
+.header-bars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background: var(--header-bg);
+  display: flex;
+  align-items: flex-end;
+  /* bars grow from bottom */
+  justify-content: space-between;
+  padding: 6px 24px;
+  z-index: 10001;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-bars .bar-container {
+  width: min(100%, 860px);
+  max-width: 860px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--bar-gap);
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-height: 44px;
+    --bar-width: 6px;
+  }
+
+  .header-bars {
+    padding: 6px 12px;
+  }
+}
+
+/* Wordmark using Barlow Semi Condensed with negative join for secret "B" */
+
+.wordmark {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  display: inline-block;
+}
+
+.wordmark .one,
+.wordmark .three {
+  display: inline-block;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.wordmark .three {
+  margin-left: -0.13em;
+}
+
+/* Active nav link indicator */
+.site-header nav a.nav-active {
+  font-weight: 700;
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+.site-header nav a {
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.site-header nav a:hover,
+.site-header nav a:focus-visible {
+  color: var(--oxblood);
+  text-decoration: none;
+  border-bottom: 2px solid var(--oxblood);
+}
+
+.site-header nav a.nav-active:hover,
+.site-header nav a.nav-active:focus-visible {
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+.header-bars .bar {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--bar-color);
+  border-radius: 2px 2px 0 0;
+  display: block;
+  height: 10%;
+  /* default small fallback */
+  transition: height 220ms ease;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-height: 44px;
+    --bar-width: 6px;
+  }
+
+  .header-bars {
+    padding: 6px 12px;
+  }
+}
+
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--oxblood);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--oxblood);
+  text-decoration: underline;
+}
+
+.site-shell {
+  width: 100% !important;
+  max-width: 860px !important;
+  margin: 0 auto;
+  padding: 24px 24px 48px;
+}
+
+.site-header,
+.site-footer {
+  margin-bottom: 36px;
+}
+
+.content,
+.page-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.page-content>* {
+  width: 100% !important;
+  max-width: 100% !important;
+  grid-column: 1 / -1;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 860px;
+  position: sticky;
+  top: var(--header-height);
+  z-index: 10000;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 0;
+  background: var(--warm-paper);
+}
+
+.site-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.site-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.95rem;
+}
+
+.content {
+  display: grid;
+}
+
+.page-content h1,
+.page-content h2,
+.page-content h3,
+.page-content h4 {
+  line-height: 1.15;
+}
+
+.page-content h1 {
+  margin-top: 0;
+  font-size: 2.4rem;
+}
+
+.page-content p,
+.page-content li,
+.section-lead {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0.35rem 0 0.7rem;
+}
+
+.section-lead {
+  color: var(--ink);
+}
+
+/* Profile photo — circle mask, left-aligned, sized to match the h1 title width */
+.profile-photo {
+  width: 128px !important;
+  max-width: 128px !important;
+  height: 128px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 0 1.2rem 0;
+  border: 2px solid var(--ink);
+  background: var(--warm-paper);
+}
+
+@media (max-width: 640px) {
+  .profile-photo {
+    width: 96px !important;
+    max-width: 96px !important;
+    height: 96px !important;
+  }
+}
+
+.post-meta,
+.resume-meta {
+  color: var(--ink);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 28px;
+}
+
+.post-list li {
+  padding: 0;
+}
+
+/* Date labels — subtle, muted, small */
+.post-list li time {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(24, 26, 25, 0.5);
+  margin-right: 0.3rem;
+}
+
+/* Article titles — primary visual weight */
+.post-list li a {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--deep-moss);
+  text-decoration-color: transparent;
+  transition: text-decoration-color 200ms ease, color 200ms ease;
+}
+
+.post-list li a:hover {
+  color: var(--oxblood);
+  text-decoration-color: var(--oxblood);
+}
+
+.post-list li a:visited {
+  color: var(--deep-moss);
+  text-decoration-color: transparent;
+}
+
+.post-list li a:hover:visited {
+  color: var(--oxblood);
+  text-decoration-color: var(--oxblood);
+}
+
+/* Summary paragraphs — secondary */
+.post-list p {
+  margin: 0.4rem 0 0;
+  color: rgba(24, 26, 25, 0.7);
+  font-size: 0.95rem;
+}
+
+.button,
+.download-button {
+  display: inline-block;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid var(--deep-moss);
+  background: var(--deep-moss);
+  color: var(--warm-paper);
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:hover,
+.download-button:hover,
+.button:focus-visible,
+.download-button:focus-visible {
+  background: var(--deep-moss);
+  border-color: var(--deep-moss);
+  color: var(--warm-paper);
+}
+
+.download-button {
+  margin-top: 1rem;
+}
+
+.resume-block {
+  display: grid;
+  gap: 20px;
+}
+
+.resume-block h2 {
+  margin-bottom: 0.5rem;
+}
+
+.resume-block ul {
+  list-style: disc;
+  padding-left: 1.4rem;
+}
+
+.resume-context {
+  color: var(--ink);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0.2rem 0 0.75rem;
+  padding-left: 1rem;
+}
+
+@media print {
+  @page {
+    size: letter;
+    margin: 0.35in 1in 0.4in;
+  }
+
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    border-color: #000 !important;
+    box-shadow: none !important;
+    color: #000 !important;
+    text-shadow: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-family: Arial, sans-serif;
+    font-size: 8.5pt;
+    line-height: 1.14;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .header-bars,
+  .site-header,
+  .site-footer,
+  .download-button,
+  .print-note {
+    display: none !important;
+  }
+
+  .site-shell {
+    max-width: none !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0;
+  }
+
+  .resume-block {
+    display: block;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .resume-block > div,
+  .resume-block section {
+    margin: 0;
+  }
+
+  .resume-block h1 {
+    margin: 0;
+    font-size: 25pt;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .resume-block h1 + .resume-meta {
+    margin: 0.22rem 0 0.7rem;
+    font-size: 8.5pt;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .resume-block h2 {
+    margin: 0.7rem 0 0.45rem;
+    font-size: 12pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .resume-block h3 {
+    display: inline;
+    margin: 0;
+    font-size: 9pt;
+    line-height: 1.1;
+    page-break-after: avoid;
+    break-after: avoid-page;
+  }
+
+  .resume-block section > div > h3 + .resume-meta {
+    display: inline;
+    margin: 0;
+    font-size: 9pt;
+    font-weight: 700;
+  }
+
+  .resume-block section > div > h3 + .resume-meta::before {
+    content: " | ";
+  }
+
+  .resume-block section > div > h3 + .resume-meta + .resume-meta {
+    display: block;
+    margin: 0.08rem 0 0;
+    font-size: 8.5pt;
+    line-height: 1.08;
+  }
+
+  .resume-block p,
+  .resume-block li {
+    margin: 0;
+  }
+
+  .resume-block .resume-context {
+    margin: 0.12rem 0 0.32rem;
+    padding-left: 0.45rem;
+    font-size: 8.5pt;
+    line-height: 1.12;
+  }
+
+  .resume-block ul {
+    margin: 0.1rem 0 0.55rem;
+    padding-left: 1rem;
+  }
+
+  .resume-block li {
+    margin-bottom: 0.06rem;
+    padding-left: 0.05rem;
+  }
+
+  .resume-block section > div {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+
+  /* Keep this short role from splitting its heading and details across pages. */
+  .resume-block section:first-of-type > div:nth-of-type(5) {
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+
+  /* Safari drops content when this entry is protected from fragmentation. */
+  html.is-safari-print .resume-block section:first-of-type > div:nth-of-type(5) {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: none;
+  }
+}
+
+.site-footer {
+  margin-top: 56px;
+  border-top: 1px solid var(--ink);
+  padding-top: 20px;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .site-shell {
+    padding: 20px 18px 36px;
+  }
+
+  .site-header {
+    align-items: flex-start;
+  }
+}
+
+/* LinkedIn profile badge */
+.badge-base.LI-profile-badge {
+  width: auto !important;
+  max-width: 100% !important;
+  margin: 24px 0 !important;
+  overflow: visible !important;
+  display: block !important;
+}
+
+.badge-base.LI-profile-badge iframe {
+  max-width: 100% !important;
+}
+
+/* Craft page styles */
+.craft-list {
+  display: grid;
+  gap: 40px;
+}
+
+.craft-author-section+.craft-author-section {
+  margin-top: 16px;
+}
+
+.craft-author {
+  margin: 0 0 1.2rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.craft-article-title {
+  margin: 0 0 0.6rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.craft-entry {
+  padding-left: 1.6rem;
+}
+
+.craft-entry blockquote {
+  margin: 0.5rem 0 0.8rem;
+  padding-left: 1.6rem;
+  border-left: 3px solid rgba(24, 26, 25, 0.4);
+  font-style: italic;
+}
+
+.craft-entry blockquote p {
+  color: rgba(24, 26, 25, 0.85);
+  margin: 0;
+}
+
+.craft-author a,
+.craft-article-title a {
+  text-decoration-color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .craft-list {
+    gap: 28px;
+  }
+
+  .craft-author {
+    font-size: 1.1rem;
+  }
+
+  .craft-entry {
+    padding-left: 1rem;
+  }
+
+  .craft-entry blockquote {
+    margin: 0.35rem 0 0.6rem;
+    padding-left: 1rem;
+  }
+}
+
+/* Philosophy page — Values section */
+.values {
+  margin-top: 2.5rem;
+}
+
+.values h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.5rem;
+}
+
+.values h2:first-of-type {
+  margin-top: 0;
+}
+
+/* Clickable value headings — look like normal headings, not links */
+.values h2 a.value-anchor {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.values h2 a.value-anchor:hover,
+.values h2 a.value-anchor:focus-visible {
+  color: var(--oxblood);
+  text-decoration: underline;
+  border-bottom: none;
+}
+
+/* Tagline in moss green (not a link) */
+.values .value-tagline {
+  color: var(--deep-moss);
+  font-style: italic;
+  margin-bottom: 0.7rem;
+}
+
+/* DFW quotation — indented blockquote with left border (like Craft page) */
+.values blockquote.dfw-quote {
+  margin: 0.5rem 0 0.8rem;
+  padding-left: 1.6rem;
+  border-left: 3px solid rgba(24, 26, 25, 0.4);
+  font-style: italic;
+}
+
+.values blockquote.dfw-quote p {
+  color: rgba(24, 26, 25, 0.85);
+  margin: 0;
+}
+
+.values blockquote.dfw-quote p:last-child {
+  margin-top: 0.4rem;
+  font-style: normal;
+  font-size: 0.95rem;
+}
+
+/* Scroll offset for anchored headings (fixed header compensation) */
+.values h2[id] {
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+/* Blog post footnotes */
+.post .footnotes {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(24, 26, 25, 0.2);
+  font-size: 0.9rem;
+  color: rgba(24, 26, 25, 0.75);
+}
+
+.post .footnotes h2.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.post .footnotes ol {
+  padding-left: 1.2rem;
+}
+
+.post .footnotes li {
+  margin-bottom: 0.4rem;
+}
+
+.post .footnotes a[data-footnote-backref] {
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.post sup a[data-footnote-ref] {
+  text-decoration: none;
+  font-size: 0.75rem;
+  vertical-align: super;
+  line-height: 0;
+}
+
+/* Copy-to-clipboard feedback badge */
+.copy-feedback {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--warm-paper);
+  background: var(--deep-moss);
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+  vertical-align: middle;
+}
+
+.copy-feedback.visible {
+  opacity: 1;
+}

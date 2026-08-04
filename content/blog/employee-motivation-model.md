@@ -1,0 +1,91 @@
+---
+title: Employee Motivation Model
+date: 2012-03-20T00:00:00.000Z
+summary: >-
+  This model of what motivates employees (idea people, founders, early
+  employees, career employees, etc.) can be a powerful tool to communicate with
+  those employees about how they get fulfillment from their work. There are many
+  models out there, and this one may have similarities to other ways of...
+slug: employee-motivation-model
+editorial_review:
+  reviewed: true
+  date: '2026-08-03'
+  personally_specific_score: 32
+  intellectually_honest_score: 0
+  generous_to_subjects_score: 95
+  observation_separated_from_fact_score: 65
+  date_bound_advice_dated_score: 0
+  opinions_earned_score: 35
+  rights_cleared_score: 100
+  no_ai_slop_score: 42
+---
+
+This model of what motivates employees (idea people, founders, early employees, career employees, etc.) can be a powerful tool to communicate with those employees about how they get fulfillment from their work. There are many models out there, and this one may have similarities to other ways of thinking, but I at least try to offer my own spin on it.
+
+The Employee Motivation Model started as a conversation with a friend, and has evolved as others have offered tweaks to the base model. I'll introduce you to The Three Pillars, and then move on to a corollary and case study.
+
+## Pillar 1 - Team
+
+The first sign that you get fulfillment from your job is faith in the people around you in the office. Are you excited to go into the office? Do you think of your teammates as your family, friends, drinking buddies? Even if you can't be chummy with your officemates, do they at least command your attention, inspire you, or give you faith in their ability to get the job done? Either scenario, or both combined, reveal that the team is a large motivating force for you. You trust your fellow employees to execute for the company and that is one reason you are more likely to stick around.
+
+## Pillar 2 - Company
+
+The company is made up of many different assets. You are one of them. Others might be the vision, the technology, social capital, and the list goes on. However, none of those matter if the employees do not have a strong faith in the company itself. Are you truly excited about the space that your company/employer is in, to the point that you feel like you can be a company ambassador or evangelist? Chances are, if you can speak about your company passionately, then you enjoy the institution as well as believe in its long term viability. You're right at home, if you see the long term potential and can fight alongside your teammates to ensure success.
+
+## Pillar 3 - Position
+
+You'll often hear the real estate industry speak about "Location! Location! Location!" Well, the same applies in the employment world, except rather than school districts and killer views, you're dealing with your department and role at a company. Are you in a position where you make the sort of impact that you have always wanted to? Do you influence decisions and the direction of the company, or your department, in the way you envisioned? In a way that brings you great enjoyment, fulfillment, and pride in your work.
+
+The employment spectrum is a combination of the stage of a company that you are entering and your relative rank to other employees. On one hand, people enjoy entering companies in the idea phase, as a founder, an early employee, much later, and anywhere in-between. Your ability to influence decisions and even the type of decisions to be made are drastically different, depending on the stage the company is in at the time you are hired. You could be perfectly happy entering late and being a number-cruncher at a desk all day. You could be a real rock star when in comes to organizing a fledgling company instead. You just need to align your needs with the company's, and the company needs to match your skills and needs with the position that makes you enjoy coming into work every day.
+
+The other perspective of the employment spectrum is your rank relative to other employees. If you're more of a leader and manager of people, and you truly enjoy that work style, then you're probably better suited for a management role. That may seem obvious, but so many employers promote employees who are awesome at what they do, and then those employees get placed into roles that they lack all of the skills to do. Find other employees with the necessary skills and aptitude for the roles the company is trying to fill. In most cases, you can also hire people from the outside to fill those roles.
+
+The key as an employee is to align your position in a company in order to maximize your potential. Where do you see yourself in 1, 5, 10 years? As the employer, if you want to hold onto your employees, you need to listen to them, maybe even sit them down to find out the answers because oftentimes your employees are not planning ahead. Understand their potential, and see to it that they are not only happy, but contributing because they see the potential in themselves.
+
+## The Thermometer Corollary
+
+Now that you have an understanding of The Three Pillars, I want to talk about an addition to the Pillar design. It came out of a conversation with Durell actually, and has evolved into this corollary.
+
+Imagine each Pillar as a temperature thermometer, changing based on the level of belief in each Pillar. If you are excited to show up for work in order to see your family, friends, or drinking buddies, then your Team Pillar thermometer level is high. If you're really excited to be working with your teammates, then your team temperature is hovering around boiling.
+
+Lack of enthusiasm in any of the columns should be an automatic yellow flag. As the employer, you should work on correcting any issues that have led to the decline. Keeping a pulse on every employee's time at the company is ideal, but this framework is a nice way to frame questions and get to the root of issues sooner rather than later. As the employee, you can pay attention to the levels of each of your Pillars in order to reach out to your employer as soon as you notice a dip in any area. It's a two way street.
+
+Red flags should start flying as soon as either the employer or employee notices more than one Pillar thermometer dropping. For example, if you, as an employee, love the team, but you're losing interest in the company and you're not satisfied with your position anymore, then it may be time for a change. It's not necessarily a time to leave the company, but you should try to change your situation as soon as possible before things spiral out of control. If one Pillar is over-compensating for the others, then you probably have a serious problem that you aren't even aware of yet. This scenario is serious because a) one Pillar should absolutely not be the only thing making you happy at your job, and b) as soon as that one Pillar fails to make you happy anymore, it's too late to make plans.
+
+## Perks
+
+Another almost invisible Pillar is made up of miscellaneous benefits and perks that are either directly related to the company or not. I say invisible because the Perks Pillar can keep you blind to the lack of any other strong Pillars keeping you happy at your job, the core Pillars. Imagine a roof seemingly floating in thin air. Thinking about it in that way can snap you out of the almost dreamlike trance keeping you at your job.
+
+One example is the feeling of job security. You might be getting paid, and that offers some stability in your life. It can be a good feeling that outweighs your instinct to hunt for a new job. Often times miserable people will stay at their miserable jobs because they feel helpless.
+
+Another funny example, which is indirectly related to the company, is that cute barista down in the lobby coffee shop. Maybe that brings you enough enjoyment to stay at your job and ignore the falling Pillars. However, it's a false sense of happiness because it can change rapidly, then your support system is gone.
+
+## Case Study
+
+### Backstory
+
+A friend of mine, we'll call him Jack, applied for a job at a company we'll call Acme Industries. Acme is a great company that supports startups and helps them find their footing. They had recently set up shop and needed an office coordinator/leader. Jack got the job, and was very excited about this opportunity.
+
+### Team
+
+Jack was thoroughly impressed by the CEO. He believed in his vision and had seen his previous work. This was a star player, and Jack wanted to learn from him. The team also came highly recommended from friends, and they had already been helping Acme grow quickly. This company had all of the right people to get the job done, and Jack was excited to work alongside them.
+
+### Company
+
+Acme was, by all means, an incredibly great idea. Helping startups was exactly what Jack wanted to do. He was, after all, an entrepreneur himself. He saw the need for Acme's services, believed in the concept, and wanted to help execute on the vision.
+
+### Position
+
+The CEO was offering Jack an exceptional opportunity to organize and lead the office. Jack came into the position excited to make some real decisions that would directly influence the direction of the company. He was handed the reigns, and that made him very excited to be working at Acme. This was the biggest motivating factor for Jack to be working in the office.
+
+### First Pillar to Go
+
+Jack began to see some initial warning signs that he might not be at Acme for very long when his duties were actually quite different than he had anticipated. He came in the most excited about his position, but a lot of that direct influence on company/office direction didn't actually exist. The second part of his waning interest in his job came in the form of disagreements with the CEO over decisions in the office. Here, Jack was promised nearly free-reign and control, but the CEO disagreed with many of his decisions. The CEO wanted to take a completely different approach and began micro-managing Jack.
+
+Jack's belief in the company still remains strong, but without the two other Pillars, the roof becomes a seesaw, teetering and waiting to fall. And employees in this situation should not expect to stick around for very long because it is often too much to correct two Pillars. One is possible; for example, if you are unhappy with your position, it is easy for the company to put you in an appropriate place within the company, where you can make a meaningful impact.
+
+### Conclusion
+
+In the end, Jack did not decide to stay at Acme Industries. To recap, his belief in the amount of his influence within the company dwindled first, followed by his faith in, or rather respect for, the team. His belief in the company's mission remains stronger than the other two Pillars, but even that was not enough to keep him at that job.
+
+If you, or someone you know, has held a job with a company, or if you have managed employees that have left before, let me know in the comments section. I would love to hear your feedback or analyses of situations in the workplace you have encountered. Maybe there is even a way to tweak this model; feel free to let me know how, or if I missed something.

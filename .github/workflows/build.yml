@@ -1,0 +1,110 @@
+name: Build site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/blog/**'
+      - 'build.js'
+      - 'review.js'
+      - 'EDITORIAL-STANDARD.md'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/build.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'content/blog/**'
+      - 'build.js'
+      - 'review.js'
+      - 'EDITORIAL-STANDARD.md'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/build.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - run: npm install
+
+      - name: Editorial review check
+        run: npm run review
+
+      - name: Detect changed files and build
+        id: build
+        run: |
+          # Determine the before SHA for diffing
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BEFORE="${{ github.event.pull_request.base.sha }}"
+          else
+            BEFORE="${{ github.event.before }}"
+          fi
+
+          # If BEFORE is empty or all zeros (first push), do a full rebuild
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "First push or no before SHA — full rebuild"
+            npm run build
+            echo "did_build=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Get list of changed files
+          CHANGED=$(git diff --name-only "$BEFORE" "$GITHUB_SHA" || true)
+
+          echo "Changed files:"
+          echo "$CHANGED"
+
+          # Check if build.js, package.json, or package-lock.json changed → full rebuild
+          if echo "$CHANGED" | grep -qE '^(build\.js|package\.json|package-lock\.json)$'; then
+            echo "Build infrastructure changed — full rebuild"
+            npm run build
+            echo "did_build=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Check if .github/workflows/build.yml changed → full rebuild
+          if echo "$CHANGED" | grep -qE '^\.github/workflows/build\.yml$'; then
+            echo "Workflow changed — full rebuild"
+            npm run build
+            echo "did_build=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Extract changed markdown files under content/blog/
+          CHANGED_MD=$(echo "$CHANGED" | grep '^content/blog/.*\.md$' || true)
+
+          if [ -z "$CHANGED_MD" ]; then
+            echo "No blog content changed — skipping build"
+            echo "did_build=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Incremental build: only render changed posts, always update index/RSS
+          echo "Incremental build for changed posts:"
+          echo "$CHANGED_MD"
+          node build.js --only $CHANGED_MD
+          echo "did_build=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push generated files
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && steps.build.outputs.did_build == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git diff --staged --quiet \
+            || git commit -m "chore: regenerate blog posts [ci skip]"
+          git push
