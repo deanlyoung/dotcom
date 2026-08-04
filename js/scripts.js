@@ -193,6 +193,13 @@ function showCopyFeedback(link, message) {
   }, 2000);
 }
 
+/* Resume page — trigger browser print dialog for "Save as PDF" */
+function printResume() {
+  if (typeof window !== 'undefined' && typeof window.print === 'function') {
+    window.print();
+  }
+}
+
 renderObfuscatedEmails();
 buildHeaderBars();
 highlightActiveNav();
