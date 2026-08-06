@@ -302,21 +302,46 @@ a:focus-visible {
   padding: 0;
 }
 
-/* Date labels — subtle, muted, small */
-.post-list li time {
+/* Post entry — title left-aligned, date right-aligned in a row. */
+.post-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Date labels — subtle, muted, small, right column */
+.post-header .post-date {
   font-size: 0.85rem;
   font-weight: 400;
   color: rgba(24, 26, 25, 0.5);
-  margin-right: 0.3rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* Article titles — primary visual weight */
-.post-list li a {
+/* Article titles — primary visual weight, left column */
+.post-header .post-title {
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--deep-moss);
   text-decoration-color: transparent;
   transition: text-decoration-color 200ms ease, color 200ms ease;
+  min-width: 0;
+}
+
+.post-header .post-title:hover {
+  color: var(--oxblood);
+  text-decoration-color: var(--oxblood);
+}
+
+.post-header .post-title:visited {
+  color: var(--deep-moss);
+  text-decoration-color: transparent;
+}
+
+.post-header .post-title:hover:visited {
+  color: var(--oxblood);
+  text-decoration-color: var(--oxblood);
 }
 
 .post-list li a:hover {
