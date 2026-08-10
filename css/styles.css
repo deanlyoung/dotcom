@@ -782,11 +782,34 @@ a:focus-visible {
   font-size: 0.85rem;
 }
 
-.post sup a[data-footnote-ref] {
-  text-decoration: none;
-  font-size: 0.75rem;
-  vertical-align: super;
-  line-height: 0;
+/* Blog post blockquote — left border at article text edge,
+   inner text indented from border but right-aligned with article text */
+.post blockquote {
+   margin-left: 0;
+   margin-right: 0;
+   padding-left: 1.6rem;
+   padding-right: 0;
+   border-left: 3px solid var(--ink);
+   color: var(--ink);
+}
+
+.post blockquote p {
+   max-width: none !important;
+   width: auto !important;
+   margin-top: 0.5rem;
+   margin-bottom: 0.8rem;
+   margin-left: 0;
+   padding-left: 0;
+   color: var(--ink);
+}
+
+.post blockquote p:last-child {
+   margin-bottom: 0;
+}
+
+.post :not(blockquote) p {
+   max-width: 100% !important;
+   width: 100% !important;
 }
 
 /* Copy-to-clipboard feedback badge */
