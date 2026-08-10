@@ -1,8 +1,24 @@
 ---
-title: "No Near Term On-Ramp for US High-Tech Manufacturing"
+title: No Near Term On-Ramp for US High-Tech Manufacturing
 date: 2026-08-10
-summary: ""
-slug: 
+summary: >-
+  Apple's attempt to source Chinese memory chips highlights the decades-long
+  challenge of building high-tech manufacturing in the US. The gap between
+  policy incentives and actual supply-chain reality is vast, with talent,
+  equipment restrictions, and supplier competitiveness all acting as
+  bottlenecks.
+slug: no-near-term-on-ramp-for-us-high-tech-manufacturing
+editorial_review:
+  reviewed: false
+  date: ''
+  personally_specific_score: 0
+  intellectually_honest_score: 0
+  generous_to_subjects_score: 0
+  observation_separated_from_fact_score: 0
+  date_bound_advice_dated_score: 0
+  opinions_earned_score: 0
+  rights_cleared_score: 0
+  no_ai_slop_score: 0
 ---
 
 It takes decades. Multiple. We are approaching 20 years of iPhones with a plethora of incentives, learnings, and talent + supplier competitive edges [distributed globally](https://storymaps.arcgis.com/stories/5ebbce37841244cf9fcfdd3802c597a2).
