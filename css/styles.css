@@ -302,31 +302,47 @@ a:focus-visible {
   padding: 0;
 }
 
-/* Post entry — title left-aligned, date right-aligned in a row. */
+/* Post entry — title with date stacked below on mobile. */
 .post-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+   display: flex;
+   align-items: baseline;
+   justify-content: space-between;
+   gap: 1rem;
 }
 
-/* Date labels — subtle, muted, small, right column */
+/* Date labels — subtle, muted, small, right column (desktop) */
 .post-header .post-date {
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: rgba(24, 26, 25, 0.5);
-  white-space: nowrap;
-  flex-shrink: 0;
+   font-size: 0.85rem;
+   font-weight: 400;
+   color: rgba(24, 26, 25, 0.5);
+   white-space: nowrap;
+   flex-shrink: 0;
 }
 
 /* Article titles — primary visual weight, left column */
 .post-header .post-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--deep-moss);
-  text-decoration-color: transparent;
-  transition: text-decoration-color 200ms ease, color 200ms ease;
-  min-width: 0;
+   font-size: 1.15rem;
+   font-weight: 700;
+   color: var(--deep-moss);
+   text-decoration-color: transparent;
+   transition: text-decoration-color 200ms ease, color 200ms ease;
+   min-width: 0;
+}
+
+/* Standalone date (blog index — between title and summary) */
+.post-list > li .post-date {
+   display: block;
+   font-size: 0.85rem;
+   font-weight: 400;
+   color: rgba(24, 26, 25, 0.5);
+   margin: 0.3rem 0 0.5rem;
+}
+
+/* Summary paragraphs — secondary (when standalone) */
+.post-list > li > p:not(.post-date) {
+   margin: 0.4rem 0 0;
+   color: rgba(24, 26, 25, 0.7);
+   font-size: 0.95rem;
 }
 
 .post-header .post-title:hover {
@@ -571,22 +587,36 @@ a:focus-visible {
 }
 
 @media (max-width: 640px) {
-  .site-shell {
-    padding: 20px 18px 36px;
-  }
+   .post-list {
+    gap: 28px;
+   }
 
-  .site-header {
-    align-items: flex-start;
-  }
-}
+   /* Stack title and date vertically on mobile */
+   .post-header {
+    display: block;
+    gap: 0;
+   }
 
-/* LinkedIn profile badge */
-.badge-base.LI-profile-badge {
-  width: auto !important;
-  max-width: 100% !important;
-  margin: 24px 0 !important;
-  overflow: visible !important;
-  display: block !important;
+   .post-header .post-date {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(24, 26, 25, 0.5);
+    margin: 0.3rem 0 0.5rem;
+   }
+
+   .post-author {
+    font-size: 1.1rem;
+   }
+
+   .craft-entry {
+    padding-left: 1rem;
+   }
+
+   .craft-entry blockquote {
+    margin: 0.35rem 0 0.6rem;
+    padding-left: 1rem;
+   }
 }
 
 .badge-base.LI-profile-badge iframe {
