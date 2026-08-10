@@ -8,16 +8,16 @@ summary: >-
   US is as layered as the world's largest rubber band ball. And let's...
 slug: no-near-term-on-ramp-for-us-high-tech-manufacturing
 editorial_review:
-  reviewed: false
-  date: ''
-  personally_specific_score: 0
-  intellectually_honest_score: 0
-  generous_to_subjects_score: 0
-  observation_separated_from_fact_score: 0
-  date_bound_advice_dated_score: 0
-  opinions_earned_score: 0
-  rights_cleared_score: 0
-  no_ai_slop_score: 0
+  reviewed: true
+  date: '2026-08-10'
+  personally_specific_score: 48
+  intellectually_honest_score: 62
+  generous_to_subjects_score: 95
+  observation_separated_from_fact_score: 45
+  date_bound_advice_dated_score: 80
+  opinions_earned_score: 72
+  rights_cleared_score: 98
+  no_ai_slop_score: 72
 ---
 
 It takes decades. Multiple. We are approaching 20 years of iPhones with a plethora of incentives, learnings, and talent + supplier competitive edges [distributed globally](https://storymaps.arcgis.com/stories/5ebbce37841244cf9fcfdd3802c597a2).
