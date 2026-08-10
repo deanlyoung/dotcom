@@ -26,7 +26,13 @@ Apple manufacturing a major product line entirely in the US is as layered as the
 
 While Apple's recent attempts to direct specific supplier components to specific markets is a creative one, it highlights some key challenges in bringing iPhone manufacturing to the US.
 
-Quoting narrowly from [Daring Fireball](https://daringfireball.net/linked/2026/08/10/the-nyt-and-wsj-on-apple-china-and-the-ram-crisis), quoting [The New York Time](https://www.nytimes.com/2026/08/10/technology/memory-chip-shortage-ai.html?unlocked_article_code=1.4VA.49f7.Qj8S541DkkOz):> Many officials appear unsympathetic to Apple’s desire to buy Chinese chips, because the company has promised for years to move more of its supply chain to the United States but has made only small steps toward that goal, four people said.And [The Wall Street Journal](https://www.wsj.com/tech/apple-tests-chinese-memory-chips-as-supply-squeeze-bites-d292bb97?st=RwyNAQ):> Industry analysts also say CXMT’s technology still trails its foreign competitors, in part because the company’s access to the most sophisticated chip-making equipment is restricted.
+Quoting narrowly from [Daring Fireball](https://daringfireball.net/linked/2026/08/10/the-nyt-and-wsj-on-apple-china-and-the-ram-crisis), quoting [The New York Time](https://www.nytimes.com/2026/08/10/technology/memory-chip-shortage-ai.html?unlocked_article_code=1.4VA.49f7.Qj8S541DkkOz):
+
+> Many officials appear unsympathetic to Apple's desire to buy Chinese chips, because the company has promised for years to move more of its supply chain to the United States but has made only small steps toward that goal, four people said.
+
+And [The Wall Street Journal](https://www.wsj.com/tech/apple-tests-chinese-memory-chips-as-supply-squeeze-bites-d292bb97?st=RwyNAQ):
+
+> Industry analysts also say CXMT's technology still trails its foreign competitors, in part because the company's access to the most sophisticated chip-making equipment is restricted.
 
 And therein lies the single-most limiting factor in the layers of this elegant, yet tangled mess. While every component has some level of sophistication and technique tied to its manufacturing or assembly, [some are vastly more so than others](https://worksinprogress.co/issue/the-worlds-most-complex-machine/), namely the A-series chips (especially the 2nm and eventual 1.4nm chips).
 
