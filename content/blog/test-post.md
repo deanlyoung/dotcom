@@ -10,13 +10,14 @@ slug: test-post
 editorial_review:
   reviewed: true
   date: 1970-01-01T00:00:00.000Z
-  personally_specific: true
-  intellectually_honest: true
-  generous_to_subjects: true
-  observation_separated_from_fact: true
-  date_bound_advice_dated: true
-  opinions_earned: true
-  rights_cleared: true
+  personally_specific_score: 50
+  intellectually_honest_score: 50
+  generous_to_subjects_score: 50
+  observation_separated_from_fact_score: 50
+  date_bound_advice_dated_score: 50
+  opinions_earned_score: 50
+  rights_cleared_score: 50
+  no_ai_slop_score: 50
 ---
 
 # Heading Level 1
@@ -28,8 +29,6 @@ editorial_review:
 #### Heading Level 4
 
 ##### Heading Level 5
-
-###### Heading Level 6
 
 This is a paragraph with **bold text**, *italic text*, and ***both bold and italic***. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
@@ -216,7 +215,7 @@ Another divider variant:
 
 And a third using asterisks:
 
-* * *
+* * * 
 
 ---
 
@@ -248,4 +247,3 @@ Use ~~strikethrough~~ to indicate deleted text (if your renderer supports it).
 3. Third and final item in this list
 
 This concludes the test post content covering all major Markdown formatting elements including headings, paragraphs, bold, italic, code blocks, blockquotes, lists (ordered, unordered, definition, nested), tables, links (inline, reference, auto), images, horizontal rules, strikethrough, emphasis nesting, and complex nested structures.
-
