@@ -1,7 +1,12 @@
----
 title: Magical AI Through Entropy
 date: 2026-10-08T00:00:00.000Z
-summary: Rob Snyder on LinkedIn discusses how AI models use entropy in reasoning paths, with implications for cold outreach and creative problem-solving.
+summary: >-
+Rob Snyder on LinkedIn: There are, I think, a few
+reasoning paths that produce cold outreach that
+actually work. These are probably within that set
+of infinite plausible paths your AI would
+consider. But picking one of the successful
+reasoning paths is as likely as finding a needle ...
 slug: magical-ai-through-entropy
 editorial_review:
   reviewed: true
