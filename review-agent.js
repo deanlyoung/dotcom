@@ -11,8 +11,8 @@ const STANDARD_PATH = path.join(ROOT, 'EDITORIAL-STANDARD.md');
 
 // Ollama configuration
 const OLLAMA_BASE = process.env.OLLAMA_BASE || 'http://localhost:11434';
-const MODEL = 'qwen3.6:35b-mlx';
-const FETCH_TIMEOUT_MS = 90000; // 90 seconds for large model loading
+const MODEL = 'gemma4:31b-mlx';
+const FETCH_TIMEOUT_MS = 120000; // 120 seconds for large model loading
 
 // Dynamically load editorial criteria from EDITORIAL-STANDARD.md
 function loadEditorialStandard() {
@@ -90,6 +90,7 @@ function parseArgs(argv) {
     apply: false,
     batch: false,
     postFile: null,
+    criterion: null,
    };
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -98,6 +99,10 @@ function parseArgs(argv) {
     else if (arg === '--batch') parsed.batch = true;
     else if (arg === '--post' && i + 1 < args.length) {
       parsed.postFile = args[i + 1];
+      i++;
+     }
+    else if (arg === '--criterion' && i + 1 < args.length) {
+      parsed.criterion = args[i + 1];
       i++;
      }
    }
@@ -224,7 +229,7 @@ async function evaluateCriterion(criterion, content) {
 }
 
 // Evaluate a single post against all criteria — score only, no pass/fail
-async function evaluatePost(filepath, filename) {
+async function evaluatePost(filepath, filename, criterionFilter = null) {
   const raw = fs.readFileSync(filepath, 'utf8');
   const matter = require('gray-matter');
   const parsed = matter(raw);
@@ -239,9 +244,10 @@ async function evaluatePost(filepath, filename) {
    }
 
   const criteria = loadEditorialStandard();
+  const filteredCriteria = criterionFilter ? criteria.filter(c => c.name === criterionFilter) : criteria;
   const results = [];
 
-  for (const criterion of criteria) {
+  for (const criterion of filteredCriteria) {
     const result = await evaluateCriterion(criterion, parsed.content);
     results.push({ criterion: criterion.name, ...result });
    }
@@ -498,7 +504,7 @@ async function main() {
     const filename = targetFiles[fi];
     const filepath = path.join(CONTENT_DIR, filename);
     console.log('Evaluating: ' + filename + '...');
-    const result = await evaluatePost(filepath, filename);
+    const result = await evaluatePost(filepath, filename, args.criterion);
     results.push(result);
 
     if (result.locked) {
