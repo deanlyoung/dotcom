@@ -123,20 +123,20 @@ function badges(project) {
 
 function projectIndex(projects) {
   const cards = projects.map(project => `<article class="project-card">
-          <a class="project-card__link" href="/projects/${project.slug}/" aria-label="Read the ${escapeHtml(project.title)} case study">
+          <a class="project-card__link" href="/projects/${project.slug}/" aria-label="Explore the ${escapeHtml(project.title)} project">
             <div class="project-card__media"><img src="${project.hero_image}" alt="${escapeHtml(project.hero_alt)}" width="1200" height="675"${project.sort_order > 2 ? ' loading="lazy"' : ''}></div>
             <div class="project-card__body">
               <div class="project-badges">${badges(project)}</div>
               <h2>${escapeHtml(project.title)}</h2>
               ${project.subtitle ? `<p class="project-subtitle">${escapeHtml(project.subtitle)}</p>` : ''}
               <p>${escapeHtml(project.description)}</p>
-              <span class="project-card__cta">Read the case study <span aria-hidden="true">→</span></span>
+              <span class="project-card__cta">Explore project <span aria-hidden="true">→</span></span>
             </div>
           </a>
         </article>`).join('\n');
-  return `<!doctype html><html lang="en"><head>${head({title: 'Projects — Dean L. Young', description: 'Product case studies and build notes from Dean L. Young across hardware, software, AI, and the connected home.', canonical: 'https://deanlyoung.com/projects/', image: '/assets/projects/awair-local/hero.svg'})}</head>
+  return `<!doctype html><html lang="en"><head>${head({title: 'Projects — Dean L. Young', description: 'Project scopes and build notes from Dean L. Young across hardware, software, AI, and the connected home.', canonical: 'https://deanlyoung.com/projects/', image: '/assets/projects/awair-local/hero.svg'})}</head>
 <body><div class="site-shell site-shell--projects"><header class="site-header"><nav class="nav">${nav('projects')}</nav></header>
-<main class="content page-content projects-index"><header class="projects-intro"><p class="eyebrow">Selected work</p><h1>Products, systems, and the decisions behind them.</h1><p class="section-lead">Case studies written like public product briefs, with the practical details needed to understand what shipped, what remains, and how each project was built.</p></header><div class="project-grid">${cards}</div></main>${footer()}</div><script src="/js/scripts.js"></script></body></html>`;
+<main class="content page-content projects-index"><header class="projects-intro"><p class="eyebrow">Selected work</p><h1>Products, systems, and the decisions behind them.</h1><p class="section-lead">Public product briefs with the practical details needed to understand what shipped, what remains, and how each project was built.</p></header><div class="project-grid">${cards}</div></main>${footer()}</div><script src="/js/scripts.js"></script></body></html>`;
 }
 
 function projectPage(project) {
@@ -146,7 +146,7 @@ function projectPage(project) {
   const body = rendered.replace(/<h2>(.*?)<\/h2>\n([\s\S]*?)(?=<h2>|$)/g, '<section class="project-section"><h2>$1</h2><div class="project-section__body">$2</div></section>');
   return `<!doctype html><html lang="en"><head>${head({title: `${project.title} — Projects — Dean L. Young`, description: project.description, canonical: `https://deanlyoung.com/projects/${project.slug}/`, image: project.hero_image})}</head>
 <body><div class="site-shell site-shell--projects"><header class="site-header"><nav class="nav">${nav('projects')}</nav></header>
-<main class="content page-content project-detail"><p class="project-back"><a href="/projects/">← All projects</a></p><header class="project-hero"><div class="project-hero__copy"><div class="project-badges">${badges(project)}</div><p class="eyebrow">Project case study</p><h1>${escapeHtml(project.title)}</h1>${project.subtitle ? `<p class="project-hero__subtitle">${escapeHtml(project.subtitle)}</p>` : ''}<p class="project-dek">${escapeHtml(project.description)}</p>${links}</div><img src="${project.hero_image}" alt="${escapeHtml(project.hero_alt)}" width="1200" height="675"></header>
+<main class="content page-content project-detail"><p class="project-back"><a href="/projects/">← All projects</a></p><header class="project-hero"><div class="project-hero__copy"><div class="project-badges">${badges(project)}</div><p class="eyebrow">Project scope</p><h1>${escapeHtml(project.title)}</h1>${project.subtitle ? `<p class="project-hero__subtitle">${escapeHtml(project.subtitle)}</p>` : ''}<p class="project-dek">${escapeHtml(project.description)}</p>${links}</div><img src="${project.hero_image}" alt="${escapeHtml(project.hero_alt)}" width="1200" height="675"></header>
 <dl class="project-facts"><div><dt>Role</dt><dd>${escapeHtml(project.role)}</dd></div><div><dt>Timeframe</dt><dd>${escapeHtml(project.timeframe)}</dd></div><div><dt>Platforms</dt><dd>${platforms}</dd></div></dl>
 <article class="project-brief">${body}</article></main>${footer()}</div><script src="/js/scripts.js"></script></body></html>`;
 }

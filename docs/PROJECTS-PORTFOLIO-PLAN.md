@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Build a Projects section for deanlyoung.com that works equally well as a product-management portfolio and as a practical starting point for fellow builders. Each page should read as a concise, public product brief: clear about the problem, the decision process, the evidence, the tradeoffs, and what another person would need to recreate the work.
+Build a Projects section for deanlyoung.com that works equally well as a product-management portfolio and as a practical starting point for fellow builders. Each project scope should read as a concise, public product brief: clear about the problem, the decision process, the evidence, the tradeoffs, and what another person would need to recreate the work.
 
 This document is the durable source of truth for the section. Agents must update it when the project content model, evidence policy, or publishing requirements change.
 
@@ -29,11 +29,11 @@ Create `/projects/` as one editorial list rather than separate status groups. Ea
 - Project title and optional subtitle.
 - One-sentence description.
 - Separate maturity and access labels.
-- A link to the directory route for the full case study.
+- A link to the directory route for the full project scope.
 
 The design should extend the site's warm-paper, ink, oxblood, moss, and ochre palette. Use generous spacing, strong image crops, readable metadata, keyboard-visible links, and responsive layouts. Work in progress belongs in the main list with its current state stated plainly.
 
-### Project pages
+### Project scope pages
 
 Use directory routes such as `/projects/homelite/index.html`. Every page follows this order:
 
@@ -131,10 +131,10 @@ Add the corresponding metadata object to `content/projects/projects.json`; do no
 ## Portfolio boundaries
 
 - Keep the license plate project visibly incomplete and use its working title until its final name and publishable artifacts are established.
-- Keep Lowell Applied Research Group in the backlog as a possible **Initiative** case study. Add it only if the portfolio expands beyond products and buildable systems.
+- Keep Lowell Applied Research Group in the backlog as a possible **Initiative** project scope. Add it only if the portfolio expands beyond products and buildable systems.
 - Do not include the EPUB editor unless Dean's original contribution and ownership can be established.
 - Use older Awair repositories as evidence for the Awair Local story rather than separate portfolio entries.
-- Add future work only when there is a distinct problem, meaningful personal contribution, supporting evidence, and enough visual material for a credible case study.
+- Add future work only when there is a distinct problem, meaningful personal contribution, supporting evidence, and enough visual material for a credible project scope.
 
 ## Implementation requirements
 

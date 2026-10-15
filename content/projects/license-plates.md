@@ -28,7 +28,7 @@ No product experience is being represented publicly yet.
 
 ## Decisions and tradeoffs
 
-The current decision is to preserve uncertainty instead of filling this case study with inferred details.
+The current decision is to preserve uncertainty instead of filling this project scope with inferred details.
 
 ## Risks and mitigations
 
