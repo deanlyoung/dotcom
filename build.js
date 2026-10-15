@@ -81,6 +81,7 @@ function buildPostTemplate(post) {
           <nav class="nav">
             <a href="/about">About</a>
             <a href="/resume">Resume</a>
+            <a href="/projects">Projects</a>
             <a href="/blog"><span class="wordmark"><span class="one">1</span><span class="three">3</span>log</span></a>
           </nav>
         </div>
@@ -147,6 +148,7 @@ function buildIndex(posts) {
           <nav class="nav">
             <a href="/about">About</a>
             <a href="/resume">Resume</a>
+            <a href="/projects">Projects</a>
             <a href="/blog"><span class="wordmark"><span class="one">1</span><span class="three">3</span>log</span></a>
           </nav>
         </div>

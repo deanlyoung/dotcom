@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HomeLite — Projects — Dean L. Young</title>
+    <meta name="description" content="HomeLite turns a Raspberry Pi and inexpensive Android tablet into a private, glanceable household dashboard.">
+    <link rel="canonical" href="https://deanlyoung.com/projects/homelite/">
+    <meta property="og:title" content="HomeLite — Projects — Dean L. Young">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deanlyoung.com/projects/homelite/">
+    <meta property="og:description" content="HomeLite turns a Raspberry Pi and inexpensive Android tablet into a private, glanceable household dashboard.">
+    <meta property="og:image" content="https://deanlyoung.com/assets/projects/homelite/hero.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HomeLite — Projects — Dean L. Young">
+    <meta name="twitter:description" content="HomeLite turns a Raspberry Pi and inexpensive Android tablet into a private, glanceable household dashboard.">
+    <meta name="twitter:image" content="https://deanlyoung.com/assets/projects/homelite/hero.svg">
+    <meta name="theme-color" content="#F1E9DC">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/assets/favicon.svg">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"></head>
+<body><div class="site-shell site-shell--projects"><header class="site-header"><nav class="nav"><a href="/about">About</a>
+            <a href="/resume">Resume</a>
+            <a href="/projects" class="nav-active" aria-current="page">Projects</a>
+            <a href="/blog"><span class="wordmark"><span class="one">1</span><span class="three">3</span>log</span></a></nav></header>
+<main class="content page-content project-detail"><p class="project-back"><a href="/projects/">← All projects</a></p><header class="project-hero"><div class="project-hero__copy"><div class="project-badges"><span class="project-badge project-badge--maturity">In use</span><span class="project-badge project-badge--access">Personal use</span></div><p class="eyebrow">Project case study</p><h1>HomeLite</h1><p class="project-hero__subtitle">Family Dashboard</p><p class="project-dek">HomeLite turns a Raspberry Pi and inexpensive Android tablet into a private, glanceable household dashboard.</p><p class="project-availability">No public source or download is available.</p></div><img src="/assets/projects/homelite/hero.svg" alt="Diagram of HomeLite joining household calendars, reminders, notes, and sensors on a wall tablet" width="1200" height="675"></header>
+<dl class="project-facts"><div><dt>Role</dt><dd>Product manager, designer, developer, and operator</dd></div><div><dt>Timeframe</dt><dd>2026–present</dd></div><div><dt>Platforms</dt><dd>Raspberry Pi · FastAPI · Home Assistant · Android kiosk</dd></div></dl>
+<article class="project-brief"><section class="project-section"><h2>At a glance</h2><div class="project-section__body"><p>HomeLite is a household-first, read-only dashboard for shared calendars, reminders, notes, weather, air quality, and Home Assistant conditions, hosted on a Raspberry Pi and displayed on an Android tablet.</p>
+</div></section><section class="project-section"><h2>Background and opportunity</h2><div class="project-section__body"><p>Household information was spread across phones, apps, calendars, notes, and sensor dashboards. A shared wall display could make the useful parts glanceable without turning the kitchen into another control panel or placing private family data in a new cloud service.</p>
+</div></section><section class="project-section"><h2>Business justification</h2><div class="project-section__body"><p>The household already owned the Raspberry Pi, tablet, Apple services, and Home Assistant sensors. A purpose-built local interface could combine them at low incremental cost while fitting the family&#39;s actual routines better than a general-purpose dashboard.</p>
+</div></section><section class="project-section"><h2>Goals, success measures, and non-goals</h2><div class="project-section__body"><p>The primary measure is daily usefulness at the actual 1280×800 wall display: the right information is fresh, legible, and reachable without a browser toolbar. It is intentionally read-only and currently optimized for one household. General installation, account onboarding, and broad device compatibility are not yet product goals.</p>
+</div></section><section class="project-section"><h2>Personas and stakeholders</h2><div class="project-section__body"><ul>
+<li><strong>Household members</strong> need an immediate shared view without setup or training.</li>
+<li><strong>The operator</strong> needs stale-data visibility, recovery controls, and maintainable services.</li>
+<li><strong>Guests</strong> should understand the display without gaining control of the home.</li>
+<li><strong>Service providers</strong> include Apple data sources, Home Assistant, weather, and air-quality feeds.</li>
+</ul>
+</div></section><section class="project-section"><h2>Requirements</h2><div class="project-section__body"><ul>
+<li>Run on a headless Raspberry Pi and an inexpensive Android kiosk tablet.</li>
+<li>Keep credentials server-side and household content on the home network.</li>
+<li>Preserve useful cached data when a provider becomes unavailable.</li>
+<li>Make calendar, reminders, notes, weather, and sensor detail readable by touch.</li>
+<li>Recover after restarts without requiring a desktop session on the Pi.</li>
+</ul>
+</div></section><section class="project-section"><h2>Solution and experience</h2><div class="project-section__body"><p>A FastAPI backend coordinates bounded provider sync jobs and cached snapshots. A plain HTML, CSS, and JavaScript frontend presents a rolling calendar, family reminders, meals, notes, weather, and indoor conditions. Home Assistant occupancy can wake the tablet display when someone approaches.</p>
+</div></section><section class="project-section"><h2>Decisions and tradeoffs</h2><div class="project-section__body"><p>Read-only interactions reduce accidental changes and simplify trust. Local hosting protects private content but requires household network maintenance. Designing for one fixed display produces a strong everyday experience while postponing the work needed for a general consumer setup.</p>
+</div></section><section class="project-section"><h2>Risks and mitigations</h2><div class="project-section__body"><ul>
+<li>Provider authentication can expire; retain stale data, expose status, and keep renewal deliberate.</li>
+<li>A kiosk can trap a user inside external content; use dashboard-owned navigation.</li>
+<li>Sensor availability varies; distinguish missing data from zero and explain aggregation.</li>
+<li>A personalized deployment can become brittle; keep requirements and runtime checks documented.</li>
+</ul>
+</div></section><section class="project-section"><h2>Outcomes and evidence</h2><div class="project-section__body"><p><strong>Verified outcome:</strong> Repository records document automated tests, live Raspberry Pi deployment, and browser validation at the target 1280×800 geometry.</p>
+<p><strong>Qualitative observation:</strong> The project is in personal household use; it has not been packaged or validated for other homes.</p>
+<p><strong>Proposed measure:</strong> A generalized release should measure setup completion, provider reliability, stale-data duration, and sustained weekly household use.</p>
+</div></section><section class="project-section"><h2>Build it</h2><div class="project-section__body"><p>The current build uses a Raspberry Pi, a continuously powered Android tablet with kiosk software, a local network, Home Assistant, and household data providers. The source and credentials are private, and there is no public installer. A reusable edition would need provider-neutral onboarding, secret management, hardware guidance, and a supported deployment path.</p>
+</div></section><section class="project-section"><h2>What I learned</h2><div class="project-section__body"><p>The product value comes from selection and restraint: a shared display is useful when it surfaces household context without demanding attention or exposing unnecessary controls.</p>
+</div></section><section class="project-section"><h2>What remains</h2><div class="project-section__body"><p>Replace the diagram with approved photography or a privacy-safe screenshot, define a public hardware profile, remove household-specific assumptions, and build a guided installation flow before presenting HomeLite as something others can install.</p>
+</div></section></article></main><footer class="site-footer">
+        <p>Find me on <a href="https://linkedin.com/in/deanlyoung" target="_blank" rel="noopener">LinkedIn</a>. Visit the <a href="/philosophy">Philosophy</a> and <a href="/craft">Craft</a> pages.</p>
+        <p><a href="/blog/rss.xml">Blog RSS feed</a></p>
+        <p><a href="/disclosures">Disclosures</a></p>
+        <p>&copy; Dean L. Young 2026</p>
+      </footer></div><script src="/js/scripts.js"></script></body></html>

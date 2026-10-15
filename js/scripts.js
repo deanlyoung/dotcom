@@ -220,7 +220,7 @@ function highlightActiveNav() {
 
   document.querySelectorAll('nav.nav a').forEach(link => {
     const href = link.getAttribute('href');
-    if (href === normalized || (normalized === '/' && href === '/about')) {
+    if (href === normalized || (href === '/projects' && normalized.startsWith('/projects/')) || (normalized === '/' && href === '/about')) {
       link.classList.add('nav-active');
     } else {
       link.classList.remove('nav-active');

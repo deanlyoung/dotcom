@@ -5,7 +5,11 @@ on:
     branches: [main]
     paths:
       - 'content/blog/**'
+      - 'content/projects/**'
+      - 'assets/projects/**'
       - 'build.js'
+      - 'build-projects.js'
+      - 'css/styles.css'
       - 'review.js'
       - 'EDITORIAL-STANDARD.md'
       - 'package.json'
@@ -15,7 +19,11 @@ on:
     branches: [main]
     paths:
       - 'content/blog/**'
+      - 'content/projects/**'
+      - 'assets/projects/**'
       - 'build.js'
+      - 'build-projects.js'
+      - 'css/styles.css'
       - 'review.js'
       - 'EDITORIAL-STANDARD.md'
       - 'package.json'
@@ -68,10 +76,18 @@ jobs:
           echo "Changed files:"
           echo "$CHANGED"
 
-          # Check if build.js, package.json, or package-lock.json changed → full rebuild
-          if echo "$CHANGED" | grep -qE '^(build\.js|package\.json|package-lock\.json)$'; then
+          # Check if build infrastructure changed → full rebuild
+          if echo "$CHANGED" | grep -qE '^(build\.js|build-projects\.js|package\.json|package-lock\.json)$'; then
             echo "Build infrastructure changed — full rebuild"
             npm run build
+            echo "did_build=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Project content, imagery, or styles changed → rebuild project pages.
+          if echo "$CHANGED" | grep -qE '^(content/projects/|assets/projects/|css/styles\.css)'; then
+            echo "Projects content or presentation changed — rebuilding Projects"
+            node build-projects.js
             echo "did_build=true" >> $GITHUB_OUTPUT
             exit 0
           fi

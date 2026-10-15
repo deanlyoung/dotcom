@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Multitac — Projects — Dean L. Young</title>
+    <meta name="description" content="Multitac is a native Apple workspace where notes, calculations, interactive inputs, and related ideas stay together.">
+    <link rel="canonical" href="https://deanlyoung.com/projects/multitac/">
+    <meta property="og:title" content="Multitac — Projects — Dean L. Young">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deanlyoung.com/projects/multitac/">
+    <meta property="og:description" content="Multitac is a native Apple workspace where notes, calculations, interactive inputs, and related ideas stay together.">
+    <meta property="og:image" content="https://deanlyoung.com/assets/projects/multitac/hero.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Multitac — Projects — Dean L. Young">
+    <meta name="twitter:description" content="Multitac is a native Apple workspace where notes, calculations, interactive inputs, and related ideas stay together.">
+    <meta name="twitter:image" content="https://deanlyoung.com/assets/projects/multitac/hero.svg">
+    <meta name="theme-color" content="#F1E9DC">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/assets/favicon.svg">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"></head>
+<body><div class="site-shell site-shell--projects"><header class="site-header"><nav class="nav"><a href="/about">About</a>
+            <a href="/resume">Resume</a>
+            <a href="/projects" class="nav-active" aria-current="page">Projects</a>
+            <a href="/blog"><span class="wordmark"><span class="one">1</span><span class="three">3</span>log</span></a></nav></header>
+<main class="content page-content project-detail"><p class="project-back"><a href="/projects/">← All projects</a></p><header class="project-hero"><div class="project-hero__copy"><div class="project-badges"><span class="project-badge project-badge--maturity">In progress</span><span class="project-badge project-badge--access">Pre-release</span></div><p class="eyebrow">Project case study</p><h1>Multitac</h1><p class="project-hero__subtitle">Multiple Thoughts, Any Calculation</p><p class="project-dek">Multitac is a native Apple workspace where notes, calculations, interactive inputs, and related ideas stay together.</p><div class="project-links"><a class="button button--secondary" href="https://multitac.app/" target="_blank" rel="noopener">Product website</a></div></div><img src="/assets/projects/multitac/hero.svg" alt="Multitac app mark with a matrix of calculation controls on a cobalt field" width="1200" height="675"></header>
+<dl class="project-facts"><div><dt>Role</dt><dd>Product manager, designer, and developer</dd></div><div><dt>Timeframe</dt><dd>2026–present</dd></div><div><dt>Platforms</dt><dd>iPhone · iPad · Mac · Apple Vision Pro</dd></div></dl>
+<article class="project-brief"><section class="project-section"><h2>At a glance</h2><div class="project-section__body"><p>Multitac is a native document workspace for Apple platforms where prose, calculations, results, interactive inputs, and connections to earlier notes remain together in readable files.</p>
+</div></section><section class="project-section"><h2>Background and opportunity</h2><div class="project-section__body"><p>Spreadsheets are powerful but impose a grid, note apps lose calculation context, and calculator histories are poor working documents. Multitac explores a more natural medium: write what you are thinking, calculate in place, change an assumption, and keep the reasoning readable.</p>
+</div></section><section class="project-section"><h2>Business justification</h2><div class="project-section__body"><p>A focused native app can serve people who repeatedly mix notes and calculations while differentiating through Apple-platform integration, local-first documents, and on-device assistance. A shared Swift implementation makes a near-universal app feasible without flattening every platform into the same interface.</p>
+</div></section><section class="project-section"><h2>Goals, success measures, and non-goals</h2><div class="project-section__body"><p>The goals are trustworthy calculation semantics, portable documents, responsive native editing, and feature parity adapted to iPhone, iPad, Mac, and Vision Pro. Automated compatibility and lifecycle tests measure correctness. Currency data, a cloud database, and silent use of remembered values are intentional non-goals.</p>
+</div></section><section class="project-section"><h2>Personas and stakeholders</h2><div class="project-section__body"><ul>
+<li><strong>Everyday problem solvers</strong> want calculations to remain understandable later.</li>
+<li><strong>Technical users</strong> want units, functions, and plain-text portability.</li>
+<li><strong>Apple-platform users</strong> expect native documents, windows, input methods, and accessibility.</li>
+<li><strong>The maintainer</strong> needs deterministic arithmetic separated from optional model suggestions.</li>
+</ul>
+</div></section><section class="project-section"><h2>Requirements</h2><div class="project-section__body"><ul>
+<li>Mix prose, variables, expressions, units, and results in one document.</li>
+<li>Store ordinary TAC source first as readable UTF-8 text.</li>
+<li>Support coordinated document reads, writes, autosave, undo, and file-provider access.</li>
+<li>Keep memory indexes on device and never silently override calculation variables.</li>
+<li>Label optional on-device model suggestions separately from deterministic results.</li>
+<li>Adapt navigation and interaction to each supported Apple platform.</li>
+</ul>
+</div></section><section class="project-section"><h2>Solution and experience</h2><div class="project-section__body"><p>The SwiftUI app uses a shared calculation and document engine with platform-specific presentation. A library opens personal TACs, guided prompts, and an Inspiration catalog. Results can become interactive cards, and local memory can surface related passages with their source.</p>
+</div></section><section class="project-section"><h2>Decisions and tradeoffs</h2><div class="project-section__body"><p>Plain-text-first <code>.mtac</code> files favor durability and inspection over opaque rich-document storage. A local memory index improves privacy but is rebuilt independently on each device. Broad calculation compatibility creates long-tail semantic work, so known gaps stay measured instead of hidden.</p>
+</div></section><section class="project-section"><h2>Risks and mitigations</h2><div class="project-section__body"><ul>
+<li>Incorrect arithmetic would break trust; keep calculations deterministic and extensively tested.</li>
+<li>AI suggestions can sound authoritative; label, cite, review, and separate them from results.</li>
+<li>Cross-device documents can conflict; use Apple&#39;s document infrastructure and require signed-device validation.</li>
+<li>Universal scope can create lowest-common-denominator UI; share capabilities while adapting presentation per platform.</li>
+</ul>
+</div></section><section class="project-section"><h2>Outcomes and evidence</h2><div class="project-section__body"><p><strong>Verified outcome:</strong> The repository reports required automated tests and successful compilation for Mac, iOS and iPadOS Simulator, and visionOS Simulator, with remaining gaps recorded rather than treated as complete.</p>
+<p><strong>Verified limitation:</strong> Signed cross-device iCloud behavior and some physical-device interactions remain release gates.</p>
+</div></section><section class="project-section"><h2>Build it</h2><div class="project-section__body"><p>Development requires Xcode 27 and the local Swift package in the Multitac repository. The calculation engine bundles Nerdamer under its MIT license; the application has no general third-party package download requirement. Distribution is not available yet, so the product website is informational.</p>
+</div></section><section class="project-section"><h2>What I learned</h2><div class="project-section__body"><p>Trustworthy calculation software is as much about explicit boundaries, recoverable documents, and honest validation as it is about the expression parser.</p>
+</div></section><section class="project-section"><h2>What remains</h2><div class="project-section__body"><p>Complete signed multi-device and accessibility validation, close release-critical compatibility gaps, finish distribution assets and review requirements, and replace the identity artwork here with approved product screenshots when they are ready for publication.</p>
+</div></section></article></main><footer class="site-footer">
+        <p>Find me on <a href="https://linkedin.com/in/deanlyoung" target="_blank" rel="noopener">LinkedIn</a>. Visit the <a href="/philosophy">Philosophy</a> and <a href="/craft">Craft</a> pages.</p>
+        <p><a href="/blog/rss.xml">Blog RSS feed</a></p>
+        <p><a href="/disclosures">Disclosures</a></p>
+        <p>&copy; Dean L. Young 2026</p>
+      </footer></div><script src="/js/scripts.js"></script></body></html>

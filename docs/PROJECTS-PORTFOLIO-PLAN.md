@@ -52,9 +52,9 @@ Use directory routes such as `/projects/homelite/index.html`. Every page follows
 
 ## Content system
 
-Store source documents in `content/projects/*.md`. Generate the Projects index and detail pages with a dedicated build module integrated into `npm run build`. Generated HTML remains version controlled like the existing blog output.
+Store project narratives as plain Markdown in `content/projects/*.md`. Keep card metadata and build configuration in `content/projects/projects.json`; project pages do not use frontmatter. Generate the Projects index and detail pages with a dedicated build module integrated into `npm run build`. Generated HTML remains version controlled like the existing blog output.
 
-Required frontmatter:
+Required manifest fields:
 
 | Field | Contract |
 |---|---|
@@ -73,7 +73,7 @@ Required frontmatter:
 
 Optional fields are `subtitle` and `links`. Each link must contain a supported type (`source`, `download`, `website`, or `documentation`), a label, and an HTTPS URL. A link may appear only when the destination is genuinely available.
 
-The build must reject duplicate slugs or sort orders, unsupported enum values, missing images, empty alt text for non-fallback imagery, invalid links, missing required sections, and descriptions that are empty, contain more than one sentence, or exceed the agreed card length.
+The build must reject manifest entries without matching Markdown files, duplicate slugs or sort orders, unsupported enum values, missing images, empty alt text for non-fallback imagery, invalid links, missing required sections, and descriptions that are empty, contain more than one sentence, or exceed the agreed card length.
 
 ## Authoring guide
 
@@ -99,24 +99,6 @@ Use these evidence labels in the Outcomes section:
 ## Reusable project template
 
 ```markdown
----
-title: Project name
-subtitle: Optional descriptive subtitle
-slug: project-name
-description: One complete sentence describing the problem and product.
-maturity: In progress
-access: Private
-hero_image: /assets/projects/project-name/hero.svg
-hero_alt: Branded fallback for Project name
-featured: true
-sort_order: 1
-role: Product manager and builder
-timeframe: 2026–present
-platforms:
-  - Web
-links: []
----
-
 ## At a glance
 
 ## Background and opportunity
@@ -144,6 +126,8 @@ links: []
 ## What remains
 ```
 
+Add the corresponding metadata object to `content/projects/projects.json`; do not add YAML frontmatter to the Markdown file.
+
 ## Portfolio boundaries
 
 - Keep the license plate project visibly incomplete and use its working title until its final name and publishable artifacts are established.
@@ -163,7 +147,7 @@ links: []
 
 ## Test and acceptance plan
 
-- Validate the complete frontmatter and body contract, including enums, one-sentence descriptions, unique routes and order, image paths and alt text, supported links, and required sections.
+- Validate the complete manifest and body contract, including enums, one-sentence descriptions, unique routes and order, image paths and alt text, supported links, matching Markdown files, and required sections.
 - Run the existing editorial review and site build without modifying blog review data.
 - Confirm every Projects route, canonical URL, social image, navigation link, sitemap entry, and public dependency or source link.
 - Review desktop, tablet, and narrow mobile layouts for card rhythm, hero cropping, long titles, PRD tables, BOMs, diagrams, focus order, and overflow.

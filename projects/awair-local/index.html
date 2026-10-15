@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Awair Local — Projects — Dean L. Young</title>
+    <meta name="description" content="Awair Local keeps indoor air-quality readings useful in Apple Home without sending device data through a cloud service.">
+    <link rel="canonical" href="https://deanlyoung.com/projects/awair-local/">
+    <meta property="og:title" content="Awair Local — Projects — Dean L. Young">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deanlyoung.com/projects/awair-local/">
+    <meta property="og:description" content="Awair Local keeps indoor air-quality readings useful in Apple Home without sending device data through a cloud service.">
+    <meta property="og:image" content="https://deanlyoung.com/assets/projects/awair-local/hero.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Awair Local — Projects — Dean L. Young">
+    <meta name="twitter:description" content="Awair Local keeps indoor air-quality readings useful in Apple Home without sending device data through a cloud service.">
+    <meta name="twitter:image" content="https://deanlyoung.com/assets/projects/awair-local/hero.svg">
+    <meta name="theme-color" content="#F1E9DC">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" href="/assets/favicon.svg">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"></head>
+<body><div class="site-shell site-shell--projects"><header class="site-header"><nav class="nav"><a href="/about">About</a>
+            <a href="/resume">Resume</a>
+            <a href="/projects" class="nav-active" aria-current="page">Projects</a>
+            <a href="/blog"><span class="wordmark"><span class="one">1</span><span class="three">3</span>log</span></a></nav></header>
+<main class="content page-content project-detail"><p class="project-back"><a href="/projects/">← All projects</a></p><header class="project-hero"><div class="project-hero__copy"><div class="project-badges"><span class="project-badge project-badge--maturity">Shipped</span><span class="project-badge project-badge--access">Public</span></div><p class="eyebrow">Project case study</p><h1>Awair Local</h1><p class="project-hero__subtitle">Local-first Homebridge integration</p><p class="project-dek">Awair Local keeps indoor air-quality readings useful in Apple Home without sending device data through a cloud service.</p><div class="project-links"><a class="button button--secondary" href="https://github.com/deanlyoung/homebridge-awair-local" target="_blank" rel="noopener">Source on GitHub</a><a class="button button--secondary" href="https://www.npmjs.com/package/homebridge-awair-local" target="_blank" rel="noopener">Install from npm</a></div></div><img src="/assets/projects/awair-local/hero.svg" alt="Diagram connecting an Awair monitor through a local network to Homebridge and Apple Home" width="1200" height="675"></header>
+<dl class="project-facts"><div><dt>Role</dt><dd>Product manager, maintainer, and developer</dd></div><div><dt>Timeframe</dt><dd>2020–present</dd></div><div><dt>Platforms</dt><dd>Homebridge · Node.js · Apple Home</dd></div></dl>
+<article class="project-brief"><section class="project-section"><h2>At a glance</h2><div class="project-section__body"><p>Awair Local is a Homebridge plugin that reads supported Awair monitors over their local API and exposes temperature, humidity, carbon dioxide, volatile organic compounds, and particulate matter to Apple Home.</p>
+</div></section><section class="project-section"><h2>Background and opportunity</h2><div class="project-section__body"><p>While working at Awair, I saw that air-quality monitors could remain physically useful long after the software or cloud service around them changed. This personal account is the origin of the project: preserve a direct, local path from a device a person owns to the home system they already use. The published plugin implements that idea without Awair cloud credentials.</p>
+</div></section><section class="project-section"><h2>Business justification</h2><div class="project-section__body"><p>Local access extends the useful life of installed hardware, reduces dependence on a vendor service, and gives Homebridge users one place for automations and alerts. Building a focused bridge was more practical than asking every home platform to support every device model directly.</p>
+</div></section><section class="project-section"><h2>Goals, success measures, and non-goals</h2><div class="project-section__body"><p>The product goal is dependable local visibility for supported Awair readings. Useful measures include successful discovery, stable polling, correct HomeKit value ranges, and recovery after device or network interruptions. It is not a replacement for Awair firmware, a remote monitoring service, or an air-quality diagnosis tool.</p>
+</div></section><section class="project-section"><h2>Personas and stakeholders</h2><div class="project-section__body"><ul>
+<li><strong>Awair owners</strong> want to keep using hardware on their local network.</li>
+<li><strong>Homebridge operators</strong> need predictable setup, logs, and migration behavior.</li>
+<li><strong>Home occupants</strong> need readable measurements and trustworthy alert thresholds.</li>
+<li><strong>Maintainers</strong> need compatibility boundaries that can be tested without private services.</li>
+</ul>
+</div></section><section class="project-section"><h2>Requirements</h2><div class="project-section__body"><ul>
+<li>Read supported measurements from the device&#39;s documented local endpoints.</li>
+<li>Support automatic discovery and explicit host configuration.</li>
+<li>Keep device addresses and readings on the local network.</li>
+<li>Clamp only values presented to HomeKit while preserving the source reading for diagnostics.</li>
+<li>Retain configuration compatibility where practical and document migrations.</li>
+</ul>
+</div></section><section class="project-section"><h2>Solution and experience</h2><div class="project-section__body"><p>The plugin is a Homebridge v2 dynamic platform. It discovers and verifies compatible devices, polls the local API, maps readings to HomeKit services, and caches accessories across restarts. Manual configuration remains available for networks where devices advertise a hostname but cannot be enumerated.</p>
+</div></section><section class="project-section"><h2>Decisions and tradeoffs</h2><div class="project-section__body"><p>Local-only communication improves privacy and resilience but limits access to the home network and depends on the device&#39;s local API remaining enabled. Supporting discovery and manual hosts increases reliability across network setups at the cost of more configuration paths to maintain.</p>
+</div></section><section class="project-section"><h2>Risks and mitigations</h2><div class="project-section__body"><ul>
+<li>Device models and network advertisements vary; verify candidates against the device configuration endpoint.</li>
+<li>HomeKit characteristic ranges can differ from sensor output; constrain the HomeKit-facing value and retain diagnostic fidelity.</li>
+<li>Local networks change; cache stable device identity and accept host updates.</li>
+</ul>
+</div></section><section class="project-section"><h2>Outcomes and evidence</h2><div class="project-section__body"><p><strong>Verified outcome:</strong> The public repository identifies the plugin as Homebridge verified, and its package includes automated lint, test, installation, and packaging checks.</p>
+<p><strong>Personal account:</strong> The motivation came from my experience at Awair and my interest in keeping owned hardware useful without an unnecessary cloud dependency.</p>
+</div></section><section class="project-section"><h2>Build it</h2><div class="project-section__body"><p>Install Homebridge 2 on Node.js 22 or 24, enable the Awair Local API, then install <code>homebridge-awair-local</code> from the Homebridge UI or npm. The public README documents discovery, manual configuration, migration, supported readings, and development commands.</p>
+</div></section><section class="project-section"><h2>What I learned</h2><div class="project-section__body"><p>A small integration can carry a substantial product promise: ownership should continue to mean something when a cloud service is unavailable.</p>
+</div></section><section class="project-section"><h2>What remains</h2><div class="project-section__body"><p>Continue testing new Homebridge and Node releases, maintain device discovery across network environments, and make compatibility limits explicit as upstream platforms evolve.</p>
+</div></section></article></main><footer class="site-footer">
+        <p>Find me on <a href="https://linkedin.com/in/deanlyoung" target="_blank" rel="noopener">LinkedIn</a>. Visit the <a href="/philosophy">Philosophy</a> and <a href="/craft">Craft</a> pages.</p>
+        <p><a href="/blog/rss.xml">Blog RSS feed</a></p>
+        <p><a href="/disclosures">Disclosures</a></p>
+        <p>&copy; Dean L. Young 2026</p>
+      </footer></div><script src="/js/scripts.js"></script></body></html>
