@@ -2,51 +2,51 @@
 
 ## Baseline
 
-> Publish writing that is personally specific, intellectually honest, and generous to the people it describes. Separate observation from fact; date-bound advice stays dated; strong opinions earn their force through evidence, scope, and consequences; remove AI-slop patterns; publish only material you have the right to share.
+> Publish writing that is personally specific, intellectually honest, and generous to the people it describes. Separate observation from fact; date-bound advice stays dated; strong opinions earn their force through evidence, scope, and consequences; flag AI-slop patterns; publish only material you have the right to share.
 
-This standard applies to **every blog post** before it is built into an HTML post and published through automated workflow. No post is deployed without a completed Editorial Review that passes that point in time's Editorial Criteria, which may be subject to change over time, but should not apply to previous articles that passed review and published successfully.
+Every new blog post receives an editorial review before publication. The review
+records feedback against the criteria below and scores each criterion from 0 to
+100.
 
----
+## Author Copy
+
+Preserve the author's title, prose, punctuation, and quotations exactly unless
+the author explicitly asks for copy edits. Record editorial suggestions as
+feedback for the author. A request to publish author-supplied copy authorizes
+publication as submitted once the review is recorded, including when the review
+suggests changes.
+
+Set up the frontmatter and make Markdown formatting adjustments that preserve
+the visible text, such as formatting a supplied URL as a link or marking quoted
+paragraphs as a blockquote.
 
 ## How It Is Enforced
 
-Every post's markdown source (`content/blog/*.md`) must pass two layers of review:
-
-1. **Editorial standard** — the `editorial_review` frontmatter block is complete with all eight criteria set to `false` initially, then the article is systematically and in full assessed (by an Agent) against each Editorial Criteria.
-2. **Markdown formatting** — the post is technically correct: frontmatter fields are valid, reference links and footnotes are defined and used, heading hierarchy doesn't skip levels, images have alt text, no trailing whitespace, and content is present.
-
-The build pipeline checks both layers in two places:
-
-| Check | Where | Behavior |
-|-------|-------|----------|
-| **Strict review** | `npm run review` (and CI) | Exits non-zero if any post fails editorial or formatting checks. Blocks deployment. |
-| **Build warning** | `npm run build` | Prints warnings for posts that fail review but still builds them. Allows local preview of drafts. |
-
-The CI workflow (`.github/workflows/build.yml`) runs `npm run review` **before** the build step. If any post fails review, the workflow stops and nothing is published.
-
----
+`npm run review` checks frontmatter and Markdown structure before the site build.
+The site builder includes posts whose `editorial_review.reviewed` flag is
+`true`. Numeric scores record the assessment and guide editorial feedback.
 
 ## Frontmatter Format
 
-Append this block to every post's frontmatter if it does not already exist. Note: future posts could gain new or lose old Editorial Criteria items, so this block will need to be updated as the criteria change over time.
+Start with `reviewed: false` and zero scores for all eight criteria. The nested
+`date` records the review date independently of the post's publication date.
+After review, record the scores and set `reviewed: true` when the author has
+authorized publication. Preserve the recorded scores on published posts unless
+the author requests a new review or the post receives substantive revisions.
 
 ```yaml
 editorial_review:
   reviewed: false
-  date: current date in yyyy-MM-dd format
-  personally_specific: false
-  intellectually_honest: false
-  generous_to_subjects: false
-  observation_separated_from_fact: false
-  date_bound_advice_dated: false
-  opinions_earned: false
-  rights_cleared: false
-  no_ai_slop: false
+  date: '2026-08-01'
+  personally_specific_score: 0
+  intellectually_honest_score: 0
+  generous_to_subjects_score: 0
+  observation_separated_from_fact_score: 0
+  date_bound_advice_dated_score: 0
+  opinions_earned_score: 0
+  rights_cleared_score: 0
+  no_ai_slop_score: 0
 ```
-
-Through Editorial Review, all Editorial Criteria must be `true` in order to pass. The `date` field records when the review was performed (yyyy-MM-dd format), regardless of whether each criteria resulted in a `true` or `false`. Each boolean represents that Editorial Review's result on the date it was last run. It will not run again and update the date if all criteria passed with `true`. That post is considered reviewed and published. If a criterion does not apply to a given post (e.g., no date-bound advice), mark it `true` — the criterion is therefore satisfied. The Editorial Criteria may change over time, but new or removed criteria only apply to non-passed and published posts. The frontmatter `editorial_review` data should remain constant the moment Editorial Review passes with `true` on every item, and the frontmatter is therefore locked. Content such as typos, grammar fixes, fixing broken links, etc. may be fixed in the future, but those would not trigger a new Editorial Review workflow and would not update frontmatter `editorial_review` values. Therefore, those types of changes to articles would not trigger a new Editorial Review.
-
----
 
 ## Editorial Criteria
 
@@ -111,12 +111,11 @@ In addition to the editorial criteria, `npm run review` validates the technical 
 
 ## Workflow
 
-1. (Human) **Write** the post in `content/blog/your-post.md`
-2. (Agent) **Review** the post against the eight editorial criteria above
-3. (Agent) **Fill in** the `editorial_review` frontmatter block, setting each criterion to `true` and dating the review
-4. (Agent) **Check locally:** `npm run review` — confirms all posts pass both editorial and formatting checks
-5. (Agent) **Preview locally:** `npm run build && npm run serve` — builds and serves the site
-6. (Agent) **Publish:** Push to `main`. CI runs `npm run review` first (blocks if any post fails), then builds and deploys.
+1. Save the supplied post in `content/blog/your-post.md` with its requested date, summary, slug, and editorial review block.
+2. Review the supplied copy against the eight criteria. Use `npm run editorial-agent -- --post your-post --dry-run` for a targeted review and share any suggestions as feedback.
+3. Record all eight numeric scores and the review date. Set `reviewed: true` for a completed review when publication is authorized.
+4. Run `npm run review`, build, and preview locally.
+5. Push to `main` and verify the public post, blog listing, RSS feed, and sitemap. If the build automation is unavailable, commit the locally validated generated files so GitHub Pages can publish from `main`.
 
 ---
 
@@ -124,8 +123,8 @@ In addition to the editorial criteria, `npm run review` validates the technical 
 
 | Command | Purpose |
 |---------|---------|
-| `npm run review` | Check all posts against the editorial standard and markdown formatting. Exits non-zero on failure. |
-| `npm run build` | Build all posts. Warns about posts that fail review but does not block. |
+| `npm run review` | Check frontmatter and Markdown formatting for all posts. Exits non-zero on failure. |
+| `npm run build` | Build the site and include reviewed posts. |
 | `npm run serve` | Start local dev server on port 8000. |
 | `npm start` | Build then serve. |
 
@@ -148,16 +147,16 @@ date: 2026-08-01
 summary: "A brief description for listings and SEO."
 slug: my-new-post
 editorial_review:
-  reviewed: true
-  date: 2026-08-01
-  personally_specific: true
-  intellectually_honest: true
-  generous_to_subjects: true
-  observation_separated_from_fact: true
-  date_bound_advice_dated: true
-  opinions_earned: true
-  rights_cleared: true
-  no_ai_slop: true
+  reviewed: false
+  date: '2026-08-01'
+  personally_specific_score: 0
+  intellectually_honest_score: 0
+  generous_to_subjects_score: 0
+  observation_separated_from_fact_score: 0
+  date_bound_advice_dated_score: 0
+  opinions_earned_score: 0
+  rights_cleared_score: 0
+  no_ai_slop_score: 0
 ---
 
 Post content here...

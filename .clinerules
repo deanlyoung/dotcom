@@ -15,20 +15,18 @@ This is a static personal website for deanlyoung.com. It uses:
 - `serve.sh` checks if port 8000 is already in use — if so, it prints a message and exits gracefully instead of crashing
 
 ## npm Scripts
-- `npm run build` — builds blog posts from markdown to HTML (warns about unreviewed posts, does not block)
-- `npm run review` — checks all posts against the editorial standard; exits non-zero on failure
+- `npm run build` — builds reviewed blog posts from Markdown to HTML
+- `npm run review` — checks all posts for frontmatter and Markdown formatting errors
 - `npm run serve` — starts `live-server` on port 8000 (via `serve.sh`, with port conflict detection)
 - `npm start` — builds blog posts then starts the server
 
 ## Editorial Standard
 Every blog post must pass editorial review before publishing. The standard is defined in `EDITORIAL-STANDARD.md`.
 
-- Each post's frontmatter must include an `editorial_review` block with seven criteria, all set to `true`
-- `npm run review` validates all posts — CI runs this before build and blocks deployment on failure
-- `npm run build` prints non-blocking warnings for unreviewed posts (allows local preview of drafts)
-- When creating or editing a blog post, always include the `editorial_review` frontmatter block
-- The seven criteria: `personally_specific`, `intellectually_honest`, `generous_to_subjects`, `observation_separated_from_fact`, `date_bound_advice_dated`, `opinions_earned`, `rights_cleared`
-- `npm run review` also checks markdown formatting: frontmatter fields, reference links, footnotes, heading hierarchy, image alt text, trailing whitespace, and empty content
+- Preserve the author's wording, punctuation, title, and quotations. Editorial review provides scores and suggestions. Apply copy edits only when explicitly requested.
+- Each post needs an `editorial_review` block with its review date and all eight numeric `_score` values defined in `EDITORIAL-STANDARD.md`.
+- After review, set `reviewed: true` when publication is authorized. The build uses this flag to include the post.
+- Run `npm run review` for frontmatter and Markdown formatting before building and publishing.
 
 ## File Structure
 - `index.html` — homepage
