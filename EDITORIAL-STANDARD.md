@@ -117,6 +117,13 @@ In addition to the editorial criteria, `npm run review` validates the technical 
 4. Run `npm run review`, build, and preview locally.
 5. Push to `main` and verify the public post, blog listing, RSS feed, and sitemap. If the build automation is unavailable, commit the locally validated generated files so GitHub Pages can publish from `main`.
 
+The full and incremental blog builds regenerate `blog/rss.xml` from every
+published post. Each item keeps its summary in `<description>` and includes the
+rendered article body in `<content:encoded>`. The builder resolves relative
+links and image URLs against the article URL and preserves in-article anchors.
+Keep the feed URL, item links, and GUIDs stable. Verify that the live feed
+contains the full body as part of publication.
+
 ---
 
 ## Commands

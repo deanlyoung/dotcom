@@ -1,9 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
-const { marked } = require('marked');
+const { Marked } = require('marked');
 const markedFootnote = require('marked-footnote');
-marked.use(markedFootnote());
 
 // NOTE: Editorial review logic has been removed from build.js.
 // Structural/formatting checks are now in review.js (called by npm run review).
@@ -40,6 +39,14 @@ function formatDate(isoDate) {
   return `${months[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
 }
 
+function escapeMarkup(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 function buildPostTemplate(post) {
   const postUrl = post.url + '/index.html';
   return `<!doctype html>
@@ -48,7 +55,7 @@ function buildPostTemplate(post) {
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>${post.title} &mdash; Dean L. Young</title>
-      <meta name="description" content="${post.summary}">
+      <meta name="description" content="${escapeMarkup(post.summary)}">
       <meta name="theme-color" content="#F1E9DC">
       <meta name="robots" content="index,follow">
       <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
@@ -58,10 +65,10 @@ function buildPostTemplate(post) {
       <meta property="og:type" content="article">
       <meta property="og:url" content="https://deanlyoung.com/${postUrl}">
       <meta property="og:image" content="https://deanlyoung.com/assets/dly-logo-color-1024.png">
-      <meta property="og:description" content="${post.summary}">
+      <meta property="og:description" content="${escapeMarkup(post.summary)}">
       <meta name="twitter:card" content="summary_large_image">
       <meta name="twitter:title" content="${post.title} &mdash; Dean L. Young">
-      <meta name="twitter:description" content="${post.summary}">
+      <meta name="twitter:description" content="${escapeMarkup(post.summary)}">
       <meta name="twitter:image" content="https://deanlyoung.com/assets/dly-logo-color-1024.png">
       <link rel="stylesheet" href="/css/styles.css">
       <!-- Google Analytics -->
@@ -108,7 +115,7 @@ function buildPostTemplate(post) {
 }
 
 function buildIndex(posts) {
-  const listItems = posts.map(post => `          <li>\n             <div class="post-header">\n               <a href="/${post.url}/index.html" class="post-title">${post.title}</a>\n               <time datetime="${post.date}" class="post-date">${formatDate(post.date)}</time>\n             </div>\n             <p>${post.summary}</p>\n           </li>`).join('\n');
+  const listItems = posts.map(post => `          <li>\n             <div class="post-header">\n               <a href="/${post.url}/index.html" class="post-title">${post.title}</a>\n               <time datetime="${post.date}" class="post-date">${formatDate(post.date)}</time>\n             </div>\n             <p>${escapeMarkup(post.summary)}</p>\n           </li>`).join('\n');
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -174,21 +181,38 @@ ${listItems}
 </html>`;
 }
 
+function feedArticleHTML(html, postUrl) {
+  return html.replace(/<[a-z][\w:-]*(?:"[^"]*"|'[^']*'|[^'">])*>/gi, tag =>
+    tag.replace(/\s(?:[^\s=/>]+)(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?/g, attribute => {
+      const match = attribute.match(/^(\s(?:href|src)\s*=\s*)(?:"([^"]*)"|'([^']*)'|([^\s>]+))$/i);
+      if (!match) return attribute;
+      const [, prefix, doubleQuoted, singleQuoted, unquoted] = match;
+      const value = doubleQuoted ?? singleQuoted ?? unquoted;
+      if (!value || /^(?:#|[a-z][a-z\d+.-]*:)/i.test(value) || !URL.canParse(value, postUrl)) {
+        return attribute;
+      }
+      const quote = singleQuoted === undefined ? '"' : "'";
+      return prefix + quote + new URL(value, postUrl).href + quote;
+    })
+  );
+}
+
 function buildRSS(posts) {
   const updated = posts[0] ? posts[0].parsedDate.toUTCString() : new Date().toUTCString();
   const items = posts.map(post => {
     const postUrl = `https://deanlyoung.com/${post.url}/index.html`;
     return `      <item>
-        <title>${post.title}</title>
+        <title>${escapeMarkup(post.title)}</title>
         <link>${postUrl}</link>
         <guid isPermaLink="true">${postUrl}</guid>
         <pubDate>${post.parsedDate.toUTCString()}</pubDate>
-        <description>${post.summary}</description>
+        <description>${escapeMarkup(post.summary)}</description>
+        <content:encoded>${escapeMarkup(feedArticleHTML(post.html, postUrl))}</content:encoded>
       </item>`;
     }).join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 <channel>
      <title>Dean L. Young</title>
      <link>https://deanlyoung.com/</link>
@@ -223,17 +247,7 @@ function loadPostMetadata(filename) {
   const summary = metadata.summary || '';
   const slug = metadata.slug || slugify(title);
   const url = `blog/${dateStr}/${slug}`;
-  return { title, summary, date: dateStr, slug, url, parsedDate: parseDate(dateStr), metadata };
-}
-
-// Read a markdown file and render its HTML (metadata + body).
-function loadPost(filename) {
-  const meta = loadPostMetadata(filename);
-  const file = path.join(CONTENT_DIR, filename);
-  const raw = fs.readFileSync(file, 'utf8');
-  const parsed = matter(raw);
-  const html = marked.parse(parsed.content);
-  return { ...meta, html };
+  return { filename, title, summary, date: dateStr, slug, url, parsedDate: parseDate(dateStr), metadata, content: parsed.content };
 }
 
 // Write a single post's HTML to the output directory.
@@ -244,7 +258,7 @@ function buildPost(post) {
   console.log(`Built: /blog/${post.date}/${post.slug}/index.html — "${post.title}"`);
 }
 
-// Load metadata for all posts, sorted newest first (no HTML rendering).
+// Load all post sources, sorted newest first.
 function loadAllPostMetadata() {
   if (!fs.existsSync(CONTENT_DIR)) {
     console.error('Content directory does not exist:', CONTENT_DIR);
@@ -256,21 +270,12 @@ function loadAllPostMetadata() {
   return posts;
 }
 
-// Load only published (editorial-reviewed) post metadata.
-function loadPublishedPosts() {
-  const allPosts = loadAllPostMetadata();
-  return allPosts.filter(post => isPostPublished(post.metadata));
-}
-
 // Remove blog output folders for posts that no longer have a markdown source,
 // or are missing editorial review, and clean up stale _data.json files.
-function cleanOrphans() {
+function cleanOrphans(posts) {
   if (!fs.existsSync(OUTPUT_DIR)) return;
 
-  const expectedKeys = new Set();
-  loadPublishedPosts().forEach(post => {
-    expectedKeys.add(`${post.date}/${post.slug}`);
-     });
+  const expectedKeys = new Set(posts.map(post => `${post.date}/${post.slug}`));
 
   const dateDirs = fs.readdirSync(OUTPUT_DIR, { withFileTypes: true })
       .filter(d => d.isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(d.name));
@@ -305,7 +310,7 @@ function cleanOrphans() {
     });
 }
 
-// Rebuild blog/index.html and blog/rss.xml from all post metadata.
+// Rebuild the listing and feed from the same published posts.
 function buildIndexAndRSS(posts) {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), buildIndex(posts));
@@ -313,86 +318,26 @@ function buildIndexAndRSS(posts) {
   console.log(`Rebuilt blog/index.html and blog/rss.xml with ${posts.length} post(s).`);
 }
 
-// Rebuild index/RSS from only published posts.
-function buildPublishedIndexAndRSS() {
-  const posts = loadPublishedPosts();
-  buildIndexAndRSS(posts);
-  return posts;
-}
-
 function main() {
   const args = process.argv.slice(2);
   const onlyIndex = args.indexOf('--only');
+  const allPosts = loadAllPostMetadata();
+  const posts = allPosts
+    .filter(post => isPostPublished(post.metadata))
+    .map(post => ({ ...post, html: new Marked(markedFootnote()).parse(post.content) }));
 
-  if (onlyIndex !== -1) {
-        // Incremental mode: only render HTML for changed posts, always update index/RSS.
-    const changedFiles = args.slice(onlyIndex + 1)
-          .filter(a => !a.startsWith('--') && a.endsWith('.md'));
+  cleanOrphans(posts);
+  if (onlyIndex === -1) {
+    posts.forEach(buildPost);
+  } else {
+    const changedFiles = new Set(args.slice(onlyIndex + 1)
+      .filter(arg => !arg.startsWith('--') && arg.endsWith('.md'))
+      .map(file => path.basename(file)));
+    posts.filter(post => changedFiles.has(post.filename)).forEach(buildPost);
+  }
 
-        // Clean orphans and stale files (handles deletions automatically).
-    cleanOrphans();
-
-        // Build only changed posts (gated by editorial review).
-    if (changedFiles.length > 0) {
-      console.log(`Incremental build: ${changedFiles.length} post(s) changed`);
-      let builtCount = 0;
-      let skippedCount = 0;
-      changedFiles.forEach(file => {
-        const filename = path.basename(file);
-        const filePath = path.join(CONTENT_DIR, filename);
-        if (fs.existsSync(filePath)) {
-          const post = loadPost(filename);
-          if (!isPostPublished(post.metadata)) {
-            console.log(`Skipped (not published): ${filename}`);
-            skippedCount++;
-            return;
-           }
-          buildPost(post);
-          builtCount++;
-           } else {
-          console.log(`Skipped (file deleted): ${file}`);
-          skippedCount++;
-           }
-         });
-      console.log(`Built: ${builtCount}, Skipped: ${skippedCount}`);
-       } else {
-      console.log('No changed posts — cleaning orphans and rebuilding index/RSS only');
-       }
-
-        // Always rebuild index and RSS from published post metadata.
-    const posts = loadPublishedPosts();
-    buildIndexAndRSS(posts);
-
-    const allPosts = loadAllPostMetadata();
-    console.log(`${posts.length} of ${allPosts.length} post(s) published.`);
-     } else {
-        // Full rebuild: render HTML only for published posts.
-    console.log('Full rebuild...');
-    const markdownFiles = fs.readdirSync(CONTENT_DIR).filter(name => name.endsWith('.md'));
-    let builtCount = 0;
-    let skippedCount = 0;
-
-    for (const filename of markdownFiles) {
-      const post = loadPost(filename);
-      if (!isPostPublished(post.metadata)) {
-        console.log(`Skipped (not published): ${filename}`);
-        skippedCount++;
-        continue;
-       }
-      buildPost(post);
-      builtCount++;
-       }
-
-        // Clean orphans and stale files.
-    cleanOrphans();
-
-        // Build index and RSS from only published posts.
-    const posts = loadPublishedPosts();
-    buildIndexAndRSS(posts);
-
-    const allPosts = loadAllPostMetadata();
-    console.log(`Built: ${builtCount}, Skipped: ${skippedCount}. Published: ${posts.length} of ${allPosts.length} total.`);
-     }
+  buildIndexAndRSS(posts);
+  console.log(`${posts.length} of ${allPosts.length} post(s) published.`);
 }
 
 main();
