@@ -215,7 +215,7 @@ Another divider variant:
 
 And a third using asterisks:
 
-* * * 
+* * *
 
 ---
 

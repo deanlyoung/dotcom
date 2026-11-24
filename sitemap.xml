@@ -32,7 +32,7 @@
    </url>
    <url>
       <loc>https://deanlyoung.com/blog</loc>
-      <lastmod>2026-07-31</lastmod>
+      <lastmod>2026-11-24</lastmod>
       <priority>0.6</priority>
    </url>
    <url>
@@ -64,6 +64,11 @@
       <loc>https://deanlyoung.com/projects/license-plates</loc>
       <lastmod>2026-10-14</lastmod>
       <priority>0.5</priority>
+   </url>
+   <url>
+      <loc>https://deanlyoung.com/blog/2026-11-24/the-unlikely-but-probable-exploration-of-history-with-computers/index.html</loc>
+      <lastmod>2026-11-24</lastmod>
+      <priority>0.6</priority>
    </url>
    <url>
       <loc>https://deanlyoung.com/blog/2026-07-31/apple-upgrade-and-asset-value</loc>
